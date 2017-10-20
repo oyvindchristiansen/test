@@ -1,0 +1,45 @@
+---
+- name: Initialize hosts
+  hosts: all
+  become: yes
+  tasks:
+  - name: Distribute hosts file
+    copy:
+      src: ../files/hosts
+      dest: /etc/hosts
+      mode: 0644
+      owner: root
+      group: root
+
+- name: Manage osd servers
+  hosts: osds
+  become: yes
+  tasks:
+  - name: Check if fakedev exists
+    stat: 
+      path: /fakedev/fda
+    register: fakedev
+  - name: Create fakedev directory
+    file:
+      path: /fakedev
+      state: directory
+      mode: 0644
+      owner: root
+      group: root
+    when: fakedev.stat.islnk is not defined
+  - name: Create fda
+    shell: dd if=/dev/zero of=/fakedev/fda bs=1M count=10k 
+    when: fakedev.stat.islnk is not defined
+
+- name: Manage main server
+  hosts: pet
+  become: yes
+  tasks:
+  - name: Install git on main server
+    yum:
+      name: git
+      state: latest
+  - name: Set up routing for localnet
+    lineinfile: 
+      path: /etc/sysctl.conf
+      line: "net.ipv4.ip_forward = 1"
