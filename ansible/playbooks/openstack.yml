@@ -1,0 +1,25 @@
+---
+
+- name: Create instances
+  hosts: localhost
+  tasks:
+  - name: create instance
+    os_server: 
+      state: present
+      name: "{{ item.name }}"
+      image: 679ec412-4c80-4d79-9b70-6f632925b563
+      flavor: 1493be98-d150-4f69-8154-4d59ea49681c
+      network: 3db9746e-cdbf-48a6-80c6-a3724145b153
+      security_groups: c8359c27-ff57-4e27-bf39-cccffbbe6821
+      auto_ip: "{{ item.ip | default('!!null') }}"
+      #floating_ips: "{{ item.ip_float | default('!!null') }}"
+      floating_ips: !!null
+      key_name: och
+    with_items:
+      #- { name: 'pet', ip_float: [ '89.45.233.23' ] }
+      - { name: 'mon-1', ip: false }
+      - { name: 'mon-2', ip: false }
+      - { name: 'mon-3', ip: false }
+      - { name: 'osd-1', ip: false }
+      - { name: 'osd-2', ip: false }
+      - { name: 'osd-3', ip: false }
