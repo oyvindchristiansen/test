@@ -1,2 +1,2 @@
 [pet]
-89.45.233.23
+89.45.233.23 ansible_connection=ssh ansible_user=centos
