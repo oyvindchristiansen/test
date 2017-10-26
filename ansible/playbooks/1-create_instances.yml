@@ -37,7 +37,7 @@
  
   - name: create hosts file
     lineinfile:
-      path: ../files/hosts
+      path: ../cluster_internal/files/hosts
       state: present
       create: yes
       regexp: '{{ item.openstack.name }}$'
