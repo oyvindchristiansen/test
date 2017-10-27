@@ -1,9 +1,0 @@
-127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
-::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
-10.0.0.11   pet
-10.0.0.18   osd-3
-10.0.0.17   osd-2
-10.0.0.16   osd-1
-10.0.0.15   mon-3
-10.0.0.14   mon-2
-10.0.0.13   mon-1

@@ -1,3 +1,0 @@
-openstack server create --image 679ec412-4c80-4d79-9b70-6f632925b563 --flavor 1493be98-d150-4f69-8154-4d59ea49681c --nic net-id=3db9746e-cdbf-48a6-80c6-a3724145b153 --security-group c8359c27-ff57-4e27-bf39-cccffbbe6821 --key-name och --min 3 --max 3 osd
-openstack server create --image 679ec412-4c80-4d79-9b70-6f632925b563 --flavor 1493be98-d150-4f69-8154-4d59ea49681c --nic net-id=3db9746e-cdbf-48a6-80c6-a3724145b153 --security-group c8359c27-ff57-4e27-bf39-cccffbbe6821 --key-name och --min 3 --max 3 mon
-openstack server create --image 679ec412-4c80-4d79-9b70-6f632925b563 --flavor 1493be98-d150-4f69-8154-4d59ea49681c --nic net-id=3db9746e-cdbf-48a6-80c6-a3724145b153 --security-group c8359c27-ff57-4e27-bf39-cccffbbe6821 --key-name och --min 1 --max 1 pet

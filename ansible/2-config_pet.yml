@@ -1,0 +1,48 @@
+---
+- name: Config pet node
+  hosts: pet
+  tasks:
+  - name: Copy ansible playbook
+    synchronize:
+      src: cluster_internal
+      dest: ~/
+      recursive: yes
+  - name: Install required packages
+    become: yes
+    yum:
+      name: "{{ item }}"
+      state: latest
+    with_items:
+      - ansible
+      - iptables-services
+  - name: Deploy hosts file
+    become: yes
+    copy:
+      src: cluster_internal/files/hosts
+      dest: /etc/hosts
+  - name: Deploy ansible cfg
+    copy:
+      src: cluster_internal/files/.ansible.cfg
+      dest: ~/
+  - name: Set up firewall NAT POSTROUTING
+    become: yes
+    iptables:
+      table: nat
+      chain: POSTROUTING
+      out_interface: eth0
+      jump: MASQUERADE
+  - name: Set up firewall NAT FORWARDING
+    become: yes
+    iptables:
+      chain: FORWARD
+      in_interface: eth0
+      out_interface: eth0
+      ctstate: RELATED,ESTABLISHED
+  - name: Set up firewall NAT FORWARDING
+    become: yes
+    iptables:
+      chain: FORWARD
+      in_interface: eth0
+      out_interface: eth0
+      jump: ACCEPT
+
